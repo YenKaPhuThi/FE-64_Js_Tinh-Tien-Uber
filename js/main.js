@@ -27,11 +27,11 @@ function handleSumCharge() {
 
 			// Set uberX is checked as default
 			// - So number Payment is caculate following uberX
-			var kmNumberTypeBegin = 8000;
-			var kmNumberTypeMiddle = 12000;
-			var kmNumberTypeExtend = 10000;
+			var kmNumberZone1 = 8000;
+			var kmNumberZone2 = 12000;
+			var kmNumberZone3 = 10000;
 
-			var staticTime = timeWaiting * 2000;
+			timeWaiting = timeWaiting * 2000;
 
 			var selectedUserType = "";
 			for (var i = 0; i < uberType.length; i++) {
@@ -42,23 +42,23 @@ function handleSumCharge() {
 			}
 
 			if (selectedUserType === "uberSUV") {
-				kmNumberTypeBegin = kmNumberTypeBegin + 1000;
-				kmNumberTypeMiddle = kmNumberTypeMiddle + 2000;
-				kmNumberTypeExtend = kmNumberTypeExtend + 2000;
-				staticTime = staticTime + 1000;
+				kmNumberZone1 = kmNumberZone1 + 1000;
+				kmNumberZone2 = kmNumberZone2 + 2000;
+				kmNumberZone3 = kmNumberZone3 + 2000;
+				timeWaiting = timeWaiting + 1000;
 			} else if (selectedUserType === "uberBlack") {
-				kmNumberTypeBegin = kmNumberTypeBegin + 2000;
-				kmNumberTypeMiddle = kmNumberTypeMiddle + 4000;
-				kmNumberTypeExtend = kmNumberTypeExtend + 4000;
-				staticTime = staticTime + 2000;
+				kmNumberZone1 = kmNumberZone1 + 2000;
+				kmNumberZone2 = kmNumberZone2 + 4000;
+				kmNumberZone3 = kmNumberZone3 + 4000;
+				timeWaiting = timeWaiting + 2000;
 			}
 
 			if (0 < kmNumber && kmNumber <= 1) {
-				sumCharging = kmNumber * kmNumberTypeBegin + staticTime;
+				sumCharging = kmNumber * kmNumberZone1 + timeWaiting;
 			} else if (1 < kmNumber && kmNumber <= 20) {
-				sumCharging = kmNumber * kmNumberTypeMiddle + staticTime;
+				sumCharging = kmNumber * kmNumberZone2 + timeWaiting;
 			} else {
-				sumCharging = kmNumber * kmNumberTypeExtend + staticTime;
+				sumCharging = kmNumber * kmNumberZone3 + timeWaiting;
 			}
 
 			chargeBlock.style.display = "block";
