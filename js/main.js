@@ -53,4 +53,12 @@ function handleSumCharging() {
 	});
 }
 
+function handlePrintBill() {
+	document.getElementById("btnPrintBill").addEventListener("click", function() {
+		var billDetail = document.getElementById("billDetail");
+		billDetail.innerHTML = "Bill detail here";
+	});
+}
+
 handleSumCharging();
+handlePrintBill();
