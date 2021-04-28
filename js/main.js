@@ -1,26 +1,26 @@
 function handleSumCharge() {
 	document.getElementById("btncharge").addEventListener("click", function () {
-		var kmNumber      = document.getElementById("kmNumber");
-		var timeWaiting   = document.getElementById("timeWaiting");
-		var chargingBlock = document.getElementById("divThanhTien");
-		var chargingInfo  = document.querySelector("#divThanhTien #xuatTien");
-		var uberType      = document.querySelectorAll('input[name="selector"]');
+		var kmNumber = document.getElementById("kmNumber");
+		var timeWaiting = document.getElementById("timeWaiting");
+		var chargeBlock = document.getElementById("divThanhTien");
+		var chargeInfo = document.querySelector("#divThanhTien #xuatTien");
+		var uberType = document.querySelectorAll('input[name="selector"]');
 
 		kmNumberVal = kmNumber.value;
 		timeWaitingVal = timeWaiting.value;
 
 		// Checkt Km Number Value or Time Waiting is empty => don't do anything
-    // - This field is required
-    if (kmNumberVal.length == 0 || timeWaitingVal == 0) {
-			chargingBlock.style.display = "block";
-			chargingInfo.innerText = "Vui lòng không để trống!";
+		// - This field is required
+		if (kmNumberVal.length == 0 || timeWaitingVal == 0) {
+			chargeBlock.style.display = "block";
+			chargeInfo.innerText = "Vui lòng không để trống!";
 
-      return null;
-    }
+			return null;
+		}
 
 		if (isNaN(kmNumberVal) || isNaN(timeWaitingVal)) {
-			chargingBlock.style.display = "block";
-			chargingInfo.innerText = "Vui lòng nhập số!";
+			chargeBlock.style.display = "block";
+			chargeInfo.innerText = "Vui lòng nhập số!";
 		} else {
 			kmNumber = parseFloat(kmNumberVal);
 			timeWaiting = parseFloat(timeWaitingVal);
@@ -61,14 +61,14 @@ function handleSumCharge() {
 				sumCharging = kmNumber * kmNumberTypeExtend + staticTime;
 			}
 
-			chargingBlock.style.display = "block";
-			chargingInfo.innerText = sumCharging + " vnd";
+			chargeBlock.style.display = "block";
+			chargeInfo.innerText = sumCharging + " vnd";
 		}
 	});
 }
 
 function handlePrintBill() {
-	document.getElementById("btnPrintBill").addEventListener("click", function() {
+	document.getElementById("btnPrintBill").addEventListener("click", function () {
 		var billDetail = document.getElementById("billDetail");
 		var getInfoCharging = handleSumCharge.kmNumberVal;
 
