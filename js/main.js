@@ -26,6 +26,19 @@ function GetUberType() {
   return uberType;
 };
 
+
+function a() {
+var chargeCost = 0;
+      if (0 < kmNumber && kmNumber <= 1) {
+        chargeCost = (kmNumber * UBER_ZONE_BEGIN) + (timeWait * UBER_ZONE_TIME);
+      }  
+	  if (1 < kmNumber && kmNumber <= 20) {
+        chargeCost = (1 * UBER_ZONE_BEGIN) + ((kmNumber - 1) * UBER_ZONE_MIDDLE) + (timeWait * UBER_ZONE_TIME);
+      } 
+        chargeCost = (1 * UBER_ZONE_BEGIN) + (19 * UBER_ZONE_MIDDLE) + ((kmNumber - 20) * UBER_ZONE_END) + (timeWait * UBER_ZONE_TIME);
+      
+}
+
 // Handle Charge Cost
 function HandleCharge() {
   getMyEleId("btncharge").addEventListener("click", function() {
@@ -38,7 +51,7 @@ function HandleCharge() {
     // - These fields are required
     if (kmNumber.length == 0 || timeWait.length == 0) {
       chargeBlock.style.display = "block";
-      chargeInfo.innerText = "Vui lòng không để trống!";
+      chargeBlock.innerText = "Vui lòng không để trống!";
 
       return null;
     }
@@ -46,9 +59,9 @@ function HandleCharge() {
     // Check value's inputted is not number
     if (isNaN(kmNumber) || isNaN(timeWait)) {
       chargeBlock.style.display = "block";
-      chargeInfo.innerText = "Vui lòng nhập số!";
+      chargeBlock.innerText = "Vui lòng nhập số!";
     } else {
-      // Covert to Float type to caculate correctly
+      // Convert to Float type to caculate correctly
       kmNumber = parseFloat(kmNumber);
       timeWait = parseFloat(timeWait);
 
