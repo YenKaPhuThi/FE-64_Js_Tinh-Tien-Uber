@@ -73,10 +73,8 @@ function handlePrintBill() {
     .getElementById("btnPrintBill")
     .addEventListener("click", function () {
       var billDetail = document.getElementById("billDetail");
-      var getInfoCharging = handleSumCharge.kmNumberVal;
-
-      console.log(getInfoCharging);
-      billDetail.innerHTML = "Bill detail here";
+      var kmInputted =  document.querySelector("#billDetail #kmInputted");
+      var chargeDetail =  document.querySelector("#billDetail #chargeDetail");
     });
 }
 
