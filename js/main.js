@@ -11,7 +11,7 @@ function handleSumCharge() {
     timeWaitingVal = timeWaiting.value;
 
     // Checkt Km Number Value or Time Waiting is empty => don't do anything
-    // - This field is required
+    // - These fields is required
     if (kmNumberVal.length == 0 || timeWaitingVal.length == 0) {
       chargeBlock.style.display = "block";
       chargeInfo.innerText = "Vui lòng không để trống!";
