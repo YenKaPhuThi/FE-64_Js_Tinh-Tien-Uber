@@ -18,7 +18,8 @@ function handleSumCharge() {
 
       return null;
     }
-
+	  
+    // Check value's inputted are not number	  
     if (isNaN(kmNumberVal) || isNaN(timeWaitingVal)) {
       chargeBlock.style.display = "block";
       chargeInfo.innerText = "Vui lòng nhập số!";
@@ -27,12 +28,6 @@ function handleSumCharge() {
       timeWaiting = parseFloat(timeWaitingVal);
 
       // Set uberX is checked as default
-      var kmNumberZone1 = 8000;
-      var kmNumberZone2 = 12000;
-      var kmNumberZone3 = 10000;
-
-      timeWaiting = timeWaiting * 2000;
-
       var uberTypeSelected = "";
       for (var i = 0; i < uberType.length; i++) {
         if (uberType[i].checked) {
@@ -40,6 +35,12 @@ function handleSumCharge() {
           break;
         }
       }
+
+      var kmNumberZone1 = 8000;
+      var kmNumberZone2 = 12000;
+      var kmNumberZone3 = 10000;
+
+      timeWaiting = timeWaiting * 2000;
 
       if (uberTypeSelected === "uberSUV") {
         kmNumberZone1 = kmNumberZone1 + 1000;
