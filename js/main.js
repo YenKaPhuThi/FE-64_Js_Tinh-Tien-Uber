@@ -27,27 +27,26 @@ function handleSumCharge() {
       timeWaiting = parseFloat(timeWaitingVal);
 
       // Set uberX is checked as default
-      // - So number Payment is caculate following uberX
       var kmNumberZone1 = 8000;
       var kmNumberZone2 = 12000;
       var kmNumberZone3 = 10000;
 
       timeWaiting = timeWaiting * 2000;
 
-      var selectedUserType = "";
+      var uberTypeSelected = "";
       for (var i = 0; i < uberType.length; i++) {
         if (uberType[i].checked) {
-          selectedUserType = uberType[i].id;
+          uberTypeSelected = uberType[i].id;
           break;
         }
       }
 
-      if (selectedUserType === "uberSUV") {
+      if (uberTypeSelected === "uberSUV") {
         kmNumberZone1 = kmNumberZone1 + 1000;
         kmNumberZone2 = kmNumberZone2 + 2000;
         kmNumberZone3 = kmNumberZone3 + 2000;
         timeWaiting = timeWaiting + 1000;
-      } else if (selectedUserType === "uberBlack") {
+      } else if (uberTypeSelected === "uberBlack") {
         kmNumberZone1 = kmNumberZone1 + 2000;
         kmNumberZone2 = kmNumberZone2 + 4000;
         kmNumberZone3 = kmNumberZone3 + 4000;
@@ -72,9 +71,15 @@ function handlePrintBill() {
   document
     .getElementById("btnPrintBill")
     .addEventListener("click", function () {
-      var billDetail = document.getElementById("billDetail");
       var kmInputted =  document.querySelector("#billDetail #kmInputted");
       var chargeDetail =  document.querySelector("#billDetail #chargeDetail");
+	  
+      // Get value of Km and Charge Info    
+      var kmNumberVal = document.getElementById("kmNumber").value;
+      var chargeInfoVal = document.getElementById("xuatTien").textContent;
+
+      kmInputted.innerHTML = kmNumberVal;
+      chargeDetail.innerHTML = chargeInfoVal;
     });
 }
 
