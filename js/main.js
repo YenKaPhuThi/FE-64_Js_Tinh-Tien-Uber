@@ -6,12 +6,13 @@ function handleSumCharge() {
     var chargeInfo = document.querySelector("#divThanhTien #xuatTien");
     var uberType = document.querySelectorAll('input[name="selector"]');
 
+    // Get value of Km and Time waiting
     kmNumberVal = kmNumber.value;
     timeWaitingVal = timeWaiting.value;
 
     // Checkt Km Number Value or Time Waiting is empty => don't do anything
     // - This field is required
-    if (kmNumberVal.length == 0 || timeWaitingVal == 0) {
+    if (kmNumberVal.length == 0 || timeWaitingVal.length == 0) {
       chargeBlock.style.display = "block";
       chargeInfo.innerText = "Vui lòng không để trống!";
 
