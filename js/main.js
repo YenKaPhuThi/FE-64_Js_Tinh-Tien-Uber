@@ -28,15 +28,15 @@ function GetUberType() {
 
 
 function a() {
-var chargeCost = 0;
-      if (0 < kmNumber && kmNumber <= 1) {
-        chargeCost = (kmNumber * UBER_ZONE_BEGIN) + (timeWait * UBER_ZONE_TIME);
-      }  
-	  if (1 < kmNumber && kmNumber <= 20) {
-        chargeCost = (1 * UBER_ZONE_BEGIN) + ((kmNumber - 1) * UBER_ZONE_MIDDLE) + (timeWait * UBER_ZONE_TIME);
-      } 
-        chargeCost = (1 * UBER_ZONE_BEGIN) + (19 * UBER_ZONE_MIDDLE) + ((kmNumber - 20) * UBER_ZONE_END) + (timeWait * UBER_ZONE_TIME);
-      
+  var chargeCost = 0;
+  if (0 < kmNumber && kmNumber <= 1) {
+    chargeCost = (kmNumber * UBER_ZONE_BEGIN) + (timeWait * UBER_ZONE_TIME);
+  }
+  if (1 < kmNumber && kmNumber <= 20) {
+    chargeCost = (1 * UBER_ZONE_BEGIN) + ((kmNumber - 1) * UBER_ZONE_MIDDLE) + (timeWait * UBER_ZONE_TIME);
+  }
+  chargeCost = (1 * UBER_ZONE_BEGIN) + (19 * UBER_ZONE_MIDDLE) + ((kmNumber - 20) * UBER_ZONE_END) + (timeWait * UBER_ZONE_TIME);
+
 }
 
 // Handle Charge Cost
