@@ -79,8 +79,8 @@ function handlePrintBill() {
       var kmNumberVal = document.getElementById("kmNumber").value;
       var chargeInfoVal = document.getElementById("xuatTien").textContent;
 
-      kmInputted.innerHTML = kmNumberVal;
-      chargeDetail.innerHTML = chargeInfoVal;
+      kmInputted.innerHTML = kmNumberVal.length ? kmNumberVal : 0;
+      chargeDetail.innerHTML = chargeInfoVal.length ? chargeInfoVal : 0;
     });
 }
 
