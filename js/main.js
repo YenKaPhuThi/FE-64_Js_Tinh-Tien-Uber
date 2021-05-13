@@ -125,8 +125,8 @@ function HandleCharge() {
     CheckValueInput("timeWait", "timeWaitNotice", 1);
 
     // Check input's value is number
-    CheckValueInputType("kmNumber", "kmNotice", 2);
-    CheckValueInputType("timeWait", "timeWaitNotice", 3);
+    // CheckValueInputType("kmNumber", "kmNotice", 2);
+    // CheckValueInputType("timeWait", "timeWaitNotice", 3);
 
     chargeBlock.style.display = "block";
     chargeInfo.innerHTML = HandleCalculateCost("kmNumber", "timeWait");
