@@ -69,6 +69,8 @@ function checkValueInputType(fieldEle, errorEle, indexMsg) {
 function handleCalculateCost(kmEle, timeWaitEle) {
   var kmNumber = getMyEleId(kmEle).value;
   var timeWait = getMyEleId(timeWaitEle).value;
+  var chargeBlock = getMyEleId("divThanhTien");
+  var chargeInfo = getMyEleSelector("#divThanhTien #xuatTien");
 
   // Incase input's value is empty  => Don't calculate cost payment
   if (kmNumber === "" || timeWait === "") {
@@ -118,16 +120,14 @@ function handleCalculateCost(kmEle, timeWaitEle) {
         timeWait * UBER_ZONE_TIME;
     }
 
-    return chargeCost;
+    chargeBlock.style.display = "block";
+    chargeInfo.innerHTML = chargeCost;
   }
 }
 
 // Handle Charge Cost Payment
 function handleCharge() {
   getMyEleId("btnCharge").addEventListener("click", function () {
-    var chargeBlock = getMyEleId("divThanhTien");
-    var chargeInfo = getMyEleSelector("#divThanhTien #xuatTien");
-
     // Check Km Number Value & Time Waiting is empty => Show message
     //- These fields are required
     checkValueInput("kmNumber", "kmError", 0);
@@ -137,8 +137,8 @@ function handleCharge() {
     checkValueInputType("kmNumber", "kmError", 2);
     checkValueInputType("timeWait", "timeWaitError", 3);
 
-    chargeBlock.style.display = "block";
-    chargeInfo.innerHTML = handleCalculateCost("kmNumber", "timeWait");
+    // Init handleCalculateCost()
+    handleCalculateCost("kmNumber", "timeWait");
   });
 }
 
