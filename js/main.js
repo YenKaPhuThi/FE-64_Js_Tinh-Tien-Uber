@@ -10,20 +10,8 @@ function getEleBySelector(ele) {
 
 // Handle get Uber type
 function getUberType() {
-  var uberType = "";
-  var uberX = getEleById("uberX").checked;
-  var uberSUV = getEleById("uberSUV").checked;
-  var uberBlack = getEleById("uberBlack").checked;
-
-  if (uberX) {
-    uberType = "uberX";
-  } else if (uberSUV) {
-    uberType = "uberSUV";
-  } else if (uberBlack) {
-    uberType = "uberBlack";
-  }
-
-  return uberType;
+  var uberType = document.querySelector('[name="selector"]:checked');
+  return uberType.id;
 }
 
 // Define error Messages
