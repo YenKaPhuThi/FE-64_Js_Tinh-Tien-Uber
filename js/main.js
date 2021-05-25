@@ -1,19 +1,19 @@
 // Get element by id
-function getMyEleId(ele) {
+function getEleById(ele) {
   return document.getElementById(ele);
 }
 
 // Get element by selector
-function getMyEleSelector(ele) {
+function getEleBySelector(ele) {
   return document.querySelector(ele);
 }
 
 // Handle get Uber type
 function getUberType() {
   var uberType = "";
-  var uberX = getMyEleId("uberX").checked;
-  var uberSUV = getMyEleId("uberSUV").checked;
-  var uberBlack = getMyEleId("uberBlack").checked;
+  var uberX = getEleById("uberX").checked;
+  var uberSUV = getEleById("uberSUV").checked;
+  var uberBlack = getEleById("uberBlack").checked;
 
   if (uberX) {
     uberType = "uberX";
@@ -36,8 +36,8 @@ var errorMessage = [
 
 // Handle check input's value
 function checkValueInput(fieldEle, errorEle, indexMsg) {
-  var fieldEle = getMyEleId(fieldEle);
-  var errorEle = getMyEleId(errorEle);
+  var fieldEle = getEleById(fieldEle);
+  var errorEle = getEleById(errorEle);
 
   errorEle.style.display = "none";
 
@@ -49,8 +49,8 @@ function checkValueInput(fieldEle, errorEle, indexMsg) {
 
 // Handle check input's value type is number
 function checkValueInputType(fieldEle, errorEle, indexMsg) {
-  var fieldEle = getMyEleId(fieldEle);
-  var errorEle = getMyEleId(errorEle);
+  var fieldEle = getEleById(fieldEle);
+  var errorEle = getEleById(errorEle);
 
   // Incase input's value is empty => Don't check value type
   if (fieldEle.value === "") {
@@ -67,10 +67,10 @@ function checkValueInputType(fieldEle, errorEle, indexMsg) {
 
 // Handle Calculate Cost Payment
 function handleCalculateCost(kmEle, timeWaitEle) {
-  var kmNumber = getMyEleId(kmEle).value;
-  var timeWait = getMyEleId(timeWaitEle).value;
-  var chargeBlock = getMyEleId("divThanhTien");
-  var chargeInfo = getMyEleSelector("#divThanhTien #xuatTien");
+  var kmNumber = getEleById(kmEle).value;
+  var timeWait = getEleById(timeWaitEle).value;
+  var chargeBlock = getEleById("divThanhTien");
+  var chargeInfo = getEleBySelector("#divThanhTien #xuatTien");
 
   // Incase input's value is empty  => Don't calculate cost payment
   if (kmNumber === "" || timeWait === "") {
@@ -127,7 +127,7 @@ function handleCalculateCost(kmEle, timeWaitEle) {
 
 // Handle Charge Cost Payment
 function handleCharge() {
-  getMyEleId("btnCharge").addEventListener("click", function () {
+  getEleById("btnCharge").addEventListener("click", function () {
     // Check Km Number Value & Time Waiting is empty => Show message
     //- These fields are required
     checkValueInput("kmNumber", "kmError", 0);
@@ -144,11 +144,11 @@ function handleCharge() {
 
 // Handle print bill
 function handlePrintBill() {
-  getMyEleId("btnPrintBill").addEventListener("click", function () {
-    var kmNumber = getMyEleId("kmNumber").value;
-    var chargeInfo = getMyEleId("xuatTien").textContent;
-    var kmInputted = getMyEleSelector("#billDetail #kmInputted");
-    var chargeDetail = getMyEleSelector("#billDetail #chargeDetail");
+  getEleById("btnPrintBill").addEventListener("click", function () {
+    var kmNumber = getEleById("kmNumber").value;
+    var chargeInfo = getEleById("xuatTien").textContent;
+    var kmInputted = getEleBySelector("#billDetail #kmInputted");
+    var chargeDetail = getEleBySelector("#billDetail #chargeDetail");
 
     kmInputted.innerHTML = kmNumber.length ? kmNumber : 0;
     chargeDetail.innerHTML = chargeInfo.length ? chargeInfo : 0;
