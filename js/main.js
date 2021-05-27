@@ -62,7 +62,7 @@ function validateNumber(fieldEle, errorEle, indexMsg) {
   return valid;
 }
 
-// Handle Calculate Cost Payment
+// Handle calculate cost payment
 function handleCalculateCost(kmEle, timeWaitEle) {
   var kmNumber = getEleById(kmEle).value;
   var timeWait = getEleById(timeWaitEle).value;
@@ -117,7 +117,7 @@ function handleCalculateCost(kmEle, timeWaitEle) {
   chargeInfo.innerHTML = chargeCost;
 }
 
-// Handle Charge Cost Payment
+// Handle charge cost payment
 function handleCharge() {
   getEleById("btnCharge").addEventListener("click", function () {
     var isEmpty = true;
