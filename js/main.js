@@ -8,9 +8,21 @@ function getEleBySelector(ele) {
   return document.querySelector(ele);
 }
 
+// Handle switch to each Uber option
+var option = document.querySelectorAll('[name="selector"]');
+
+for (var i = 0; i < option.length; i++) {
+  option[i].addEventListener("change", function () {
+    var uberType = this.id;
+
+    // Init handleCalculateCost()
+    handleCalculateCost("kmNumber", "timeWait", uberType);
+  });
+}
+
 // Handle get Uber type
 function getUberType() {
-  var uberType = document.querySelector('[name="selector"]:checked');
+  var uberType = getEleBySelector('[name="selector"]:checked');
   return uberType.id;
 }
 
@@ -63,14 +75,14 @@ function validateNumber(fieldEle, errorEle, indexMsg) {
 }
 
 // Handle calculate cost payment
-function handleCalculateCost(kmEle, timeWaitEle) {
+function handleCalculateCost(kmEle, timeWaitEle, uberType) {
   var kmNumber = getEleById(kmEle).value;
   var timeWait = getEleById(timeWaitEle).value;
   var chargeBlock = getEleById("divThanhTien");
   var chargeInfo = getEleBySelector("#divThanhTien #xuatTien");
 
   // Get Uber type
-  var uberType = getUberType();
+  var uberType = uberType;
 
   // Convert input's value to float
   kmNumber = parseFloat(kmNumber);
@@ -136,7 +148,7 @@ function handleCharge() {
 
       if (isNumber) {
         // Init handleCalculateCost()
-        handleCalculateCost("kmNumber", "timeWait");
+        handleCalculateCost("kmNumber", "timeWait", getUberType());
       }
     }
   });
