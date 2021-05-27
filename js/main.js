@@ -23,34 +23,43 @@ var errorMessage = [
 ];
 
 // Handle check input's value
-function checkValueInput(fieldEle, errorEle, indexMsg) {
+function validateEmpty(fieldEle, errorEle, indexMsg) {
   var fieldEle = getEleById(fieldEle);
   var errorEle = getEleById(errorEle);
-
-  errorEle.style.display = "none";
+  var valid = true;
 
   if (fieldEle.value === "") {
     errorEle.style.display = "block";
     errorEle.innerHTML = errorMessage[indexMsg];
+    valid = true;
+  } else {
+    errorEle.style.display = "none";
+    valid = false;
   }
+
+  return valid;
 }
 
 // Handle check input's value type is number
-function checkValueInputType(fieldEle, errorEle, indexMsg) {
+function validateNumber(fieldEle, errorEle, indexMsg) {
   var fieldEle = getEleById(fieldEle);
   var errorEle = getEleById(errorEle);
+  var valid = true;
 
-  // Incase input's value is empty => Don't check value type
   if (fieldEle.value === "") {
-    return null;
+    return;
   } else {
-    errorEle.style.display = "none";
-
     if (isNaN(fieldEle.value)) {
       errorEle.style.display = "block";
       errorEle.innerHTML = errorMessage[indexMsg];
+      valid = false;
+    } else {
+      errorEle.style.display = "none";
+      valid = true;
     }
   }
+
+  return valid;
 }
 
 // Handle Calculate Cost Payment
@@ -60,73 +69,76 @@ function handleCalculateCost(kmEle, timeWaitEle) {
   var chargeBlock = getEleById("divThanhTien");
   var chargeInfo = getEleBySelector("#divThanhTien #xuatTien");
 
-  // Incase input's value is empty  => Don't calculate cost payment
-  if (kmNumber === "" || timeWait === "") {
-    return null;
-  } else {
-    // Get Uber type
-    var uberType = getUberType();
+  // Get Uber type
+  var uberType = getUberType();
 
-    // Convert input's value to float
-    kmNumber = parseFloat(kmNumber);
-    timeWait = parseFloat(timeWait);
+  // Convert input's value to float
+  kmNumber = parseFloat(kmNumber);
+  timeWait = parseFloat(timeWait);
 
-    // Set UberX as default
-    var UBER_ZONE_BEGIN = 8000;
-    var UBER_ZONE_MIDDLE = 12000;
-    var UBER_ZONE_END = 10000;
-    var UBER_ZONE_TIME = 2000;
+  // Set UberX as default
+  var UBER_ZONE_BEGIN = 8000;
+  var UBER_ZONE_MIDDLE = 12000;
+  var UBER_ZONE_END = 10000;
+  var UBER_ZONE_TIME = 2000;
 
-    switch (uberType) {
-      case "uberSUV":
-        UBER_ZONE_BEGIN = UBER_ZONE_BEGIN + 1000;
-        UBER_ZONE_MIDDLE = UBER_ZONE_MIDDLE + 2000;
-        UBER_ZONE_END = UBER_ZONE_END + 2000;
-        UBER_ZONE_TIME = UBER_ZONE_TIME + 1000;
-        break;
-      case "uberBlack":
-        UBER_ZONE_BEGIN = UBER_ZONE_BEGIN + 2000;
-        UBER_ZONE_MIDDLE = UBER_ZONE_MIDDLE + 4000;
-        UBER_ZONE_END = UBER_ZONE_END + 4000;
-        UBER_ZONE_TIME = UBER_ZONE_TIME + 2000;
-        break;
-    }
-
-    var chargeCost = 0;
-    if (0 < kmNumber && kmNumber <= 1) {
-      chargeCost = kmNumber * UBER_ZONE_BEGIN + timeWait * UBER_ZONE_TIME;
-    } else if (1 < kmNumber && kmNumber <= 20) {
-      chargeCost =
-        1 * UBER_ZONE_BEGIN +
-        (kmNumber - 1) * UBER_ZONE_MIDDLE +
-        timeWait * UBER_ZONE_TIME;
-    } else {
-      chargeCost =
-        1 * UBER_ZONE_BEGIN +
-        19 * UBER_ZONE_MIDDLE +
-        (kmNumber - 20) * UBER_ZONE_END +
-        timeWait * UBER_ZONE_TIME;
-    }
-
-    chargeBlock.style.display = "block";
-    chargeInfo.innerHTML = chargeCost;
+  switch (uberType) {
+    case "uberSUV":
+      UBER_ZONE_BEGIN = UBER_ZONE_BEGIN + 1000;
+      UBER_ZONE_MIDDLE = UBER_ZONE_MIDDLE + 2000;
+      UBER_ZONE_END = UBER_ZONE_END + 2000;
+      UBER_ZONE_TIME = UBER_ZONE_TIME + 1000;
+      break;
+    case "uberBlack":
+      UBER_ZONE_BEGIN = UBER_ZONE_BEGIN + 2000;
+      UBER_ZONE_MIDDLE = UBER_ZONE_MIDDLE + 4000;
+      UBER_ZONE_END = UBER_ZONE_END + 4000;
+      UBER_ZONE_TIME = UBER_ZONE_TIME + 2000;
+      break;
   }
+
+  var chargeCost = 0;
+  if (0 < kmNumber && kmNumber <= 1) {
+    chargeCost = kmNumber * UBER_ZONE_BEGIN + timeWait * UBER_ZONE_TIME;
+  } else if (1 < kmNumber && kmNumber <= 20) {
+    chargeCost =
+      1 * UBER_ZONE_BEGIN +
+      (kmNumber - 1) * UBER_ZONE_MIDDLE +
+      timeWait * UBER_ZONE_TIME;
+  } else {
+    chargeCost =
+      1 * UBER_ZONE_BEGIN +
+      19 * UBER_ZONE_MIDDLE +
+      (kmNumber - 20) * UBER_ZONE_END +
+      timeWait * UBER_ZONE_TIME;
+  }
+
+  chargeBlock.style.display = "block";
+  chargeInfo.innerHTML = chargeCost;
 }
 
 // Handle Charge Cost Payment
 function handleCharge() {
   getEleById("btnCharge").addEventListener("click", function () {
-    // Check Km Number Value & Time Waiting is empty => Show message
-    //- These fields are required
-    checkValueInput("kmNumber", "kmError", 0);
-    checkValueInput("timeWait", "timeWaitError", 1);
+    var isEmpty = true;
+    var isNumber = true;
 
-    // Check input's value is number
-    checkValueInputType("kmNumber", "kmError", 2);
-    checkValueInputType("timeWait", "timeWaitError", 3);
+    // Check input's value is empty
+    isEmpty &=
+      validateEmpty("kmNumber", "kmError", 0) &
+      validateEmpty("timeWait", "timeWaitError", 1);
 
-    // Init handleCalculateCost()
-    handleCalculateCost("kmNumber", "timeWait");
+    if (!isEmpty) {
+      // Check input's value is number
+      isNumber &=
+        validateNumber("kmNumber", "kmError", 2) &
+        validateNumber("timeWait", "timeWaitError", 3);
+
+      if (isNumber) {
+        // Init handleCalculateCost()
+        handleCalculateCost("kmNumber", "timeWait");
+      }
+    }
   });
 }
 
